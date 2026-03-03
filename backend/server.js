@@ -108,8 +108,16 @@ app.post("/predict", async (req, res) => {
 
 // Latest entry
 app.get("/api/latest", async (req, res) => {
-    const latest = await HealthData.findOne().sort({ timestamp: -1 });
-    res.json(latest);
+    try {
+        const latest = await HealthData.findOne().sort({ timestamp: -1 });
+        if (!latest) {
+            return res.status(200).json(null); // Return null specifically so the frontend knows it's empty
+        }
+        res.json(latest);
+    } catch (error) {
+        console.log("❌ /api/latest Error:", error);
+        res.status(500).json({ error: "Failed to fetch latest data" });
+    }
 });
 
 // Start Server
