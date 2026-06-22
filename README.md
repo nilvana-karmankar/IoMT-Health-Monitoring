@@ -47,5 +47,3 @@ The project consists of three main components:
 - **Machine Learning**: Python
 - **Simulation**: Node.js scripts
 
-# IoMT-Health-Monitoring
-
